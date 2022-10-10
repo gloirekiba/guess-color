@@ -1,15 +1,37 @@
 const documentElement = document.documentElement;
 const colorGuess = document.getElementById("colorGuess");
-const cardColors = document.querySelectorAll(".card-color");
+const colorList = document.getElementById("colorList");
+
+// difficulty easy max 3 colors
+// difficulty medium max 6 colors
+// difficulty hard max 9 colors
+
+function difficultyToMaxColors(difficulty) {
+  switch (difficulty) {
+    case "easy":
+      return 3;
+    case "medium":
+      return 6;
+    case "hard":
+      return 9;
+    default:
+      return 3;
+  }
+}
+
+const cardColors = new Array(9).fill().map((_, index) => {
+  const cardColor = document.createElement("button");
+  cardColor.classList.add("card-color");
+  cardColor.style.backgroundColor = `var(--color-${index + 1})`;
+  cardColor.addEventListener("click", checkCorrectColor);
+  return cardColor;
+});
+
+colorList.append(...cardColors);
 
 function getRandomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-
-const config = {
-  get: () => JSON.parse(localStorage.getItem("config")) || {},
-  set: (config) => localStorage.setItem("config", JSON.stringify(config)),
-};
 
 function getRGBColor() {
   const r = getRandomNumber(0, 255);
@@ -42,10 +64,6 @@ function checkCorrectColor(event) {
     alert("Wrong!");
   }
 }
-
-cardColors.forEach((cardColor) => {
-  cardColor.addEventListener("click", checkCorrectColor);
-});
 
 function startGame() {
   changeColor();
