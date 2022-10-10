@@ -3,8 +3,8 @@ const colorGuess = document.getElementById("colorGuess");
 const colorList = document.getElementById("colorList");
 document.getElementById("newColor").addEventListener("click", changeColor);
 document.getElementById("reset").addEventListener("click", resetGame);
-document.getElementById("level").addEventListener("change", changeDifficulty);
-const [score, live] = getElementsById("score", "live");
+const level = document.getElementById("level");
+const [score, combo, live] = getElementsById("score", "combo", "live");
 
 const LOCAL_STORAGE_CONFIG_KEY = "config";
 const LEVELS = ["easy", "medium", "hard"];
@@ -17,6 +17,9 @@ const maxLive = difficultyToMaxLive(CONFIG.level);
 const maxColors = difficultyToMaxColors(CONFIG.level);
 
 live.textContent = maxLive;
+level.value = CONFIG.level;
+
+level.addEventListener("change", changeDifficulty);
 
 const cardColors = new Array(maxColors).fill().map((_, index) => {
   const cardColor = document.createElement("button");
@@ -30,9 +33,9 @@ colorList.append(...cardColors);
 
 function changeDifficulty(event) {
   const difficulty = event.target.value;
-  const cofig = getFromLocalStorage(LOCAL_STORAGE_CONFIG_KEY);
-  cofig.level = difficulty;
-  saveToLocalStorage(LOCAL_STORAGE_CONFIG_KEY, cofig);
+  const config = getFromLocalStorage(LOCAL_STORAGE_CONFIG_KEY);
+  config.level = difficulty;
+  saveToLocalStorage(LOCAL_STORAGE_CONFIG_KEY, config);
   location.reload();
 }
 
@@ -114,13 +117,16 @@ function changeColor() {
 function updateBoard(win) {
   const scoreValue = parseInt(score.textContent);
   const liveValue = parseInt(live.textContent);
+  const comboValue = parseInt(combo.textContent);
 
   if (win) {
-    score.textContent = scoreValue + SCORE_INCREMENT;
+    score.textContent = scoreValue + SCORE_INCREMENT * comboValue;
+    combo.textContent = comboValue + 1;
     return;
   }
 
   live.textContent = liveValue - LIVE_DECREMENT;
+  combo.textContent = 1;
 
   if (isGameOver()) {
     alert("Game Over!");
