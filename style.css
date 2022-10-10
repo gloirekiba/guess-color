@@ -14,16 +14,6 @@
   --font: "Silkscreen", cursive, system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
     sans-serif;
-  --correctColor: transparent;
-  --color-1: green;
-  --color-2: green;
-  --color-3: green;
-  --color-4: green;
-  --color-5: green;
-  --color-6: green;
-  --color-7: green;
-  --color-8: green;
-  --color-9: green;
 }
 
 body {
@@ -94,7 +84,7 @@ main {
   background-color: antiquewhite;
 }
 
-.colors {
+.color-list {
   display: grid;
   grid-template-columns: repeat(3, 150px);
   grid-gap: 1em;
@@ -111,33 +101,4 @@ main {
 
 .card-color:hover {
   border-color: aqua;
-}
-
-.card-color:first-child {
-  background-color: var(--color-1);
-}
-.card-color:nth-child(2) {
-  background-color: var(--color-2);
-}
-.card-color:nth-child(3) {
-  background-color: var(--color-3);
-}
-.card-color:nth-child(4) {
-  background-color: var(--color-4);
-}
-.card-color:nth-child(5) {
-  background-color: var(--color-5);
-}
-.card-color:nth-child(6) {
-  background-color: var(--color-6);
-}
-
-.card-color:nth-child(7) {
-  background-color: var(--color-7);
-}
-.card-color:nth-child(8) {
-  background-color: var(--color-8);
-}
-.card-color:nth-child(9) {
-  background-color: var(--color-9);
 }
