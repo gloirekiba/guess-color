@@ -16,13 +16,22 @@
       </header>
       <section class="controls">
         <div class="controls-container container">
-          <button class="control new-color">new color</button>
-          <button class="control profile">profile</button>
+          <div class="control-group">
+            <button id="reset" class="control">reset</button>
+            <button id="newColor" class="control">new color</button>
+          </div>
+          <div class="control-group">
+            <select id="level" class="level">
+              <option value="easy">easy</option>
+              <option value="medium">medium</option>
+              <option value="hard">hard</option>
+            </select>
+            <button id="profile" class="control">profile</button>
+          </div>
         </div>
       </section>
       <main>
         <div class="board">
-          <span>level: <span id="level"></span></span>
           <span>score: <span id="score">0</span> </span>
           <span>live: <span id="live">5</span></span>
         </div>
