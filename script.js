@@ -1,7 +1,9 @@
 const documentElement = document.documentElement;
 const colorGuess = document.getElementById("colorGuess");
 const colorList = document.getElementById("colorList");
-const [level, score, live] = getElementsById("level", "score", "live");
+document.getElementById("newColor").addEventListener("click", changeColor);
+document.getElementById("level").addEventListener("change", changeDifficulty);
+const [score, live] = getElementsById("score", "live");
 
 const LOCAL_STORAGE_CONFIG_KEY = "config";
 const LEVELS = ["easy", "medium", "hard"];
@@ -14,7 +16,6 @@ const maxLive = difficultyToMaxLive(CONFIG.level);
 const maxColors = difficultyToMaxColors(CONFIG.level);
 
 live.textContent = maxLive;
-level.textContent = CONFIG.level;
 
 const cardColors = new Array(maxColors).fill(maxColors).map((_, index) => {
   const cardColor = document.createElement("button");
@@ -25,6 +26,13 @@ const cardColors = new Array(maxColors).fill(maxColors).map((_, index) => {
 });
 
 colorList.append(...cardColors);
+
+function changeDifficulty(event) {
+  const difficulty = event.target.value;
+  CONFIG.level = difficulty;
+  saveToLocalStorage(LOCAL_STORAGE_CONFIG_KEY, CONFIG);
+  location.reload();
+}
 
 function getElementsById(...ids) {
   return ids.map((id) => document.getElementById(id));
