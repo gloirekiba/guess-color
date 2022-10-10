@@ -2,6 +2,7 @@ const documentElement = document.documentElement;
 const colorGuess = document.getElementById("colorGuess");
 const colorList = document.getElementById("colorList");
 document.getElementById("newColor").addEventListener("click", changeColor);
+document.getElementById("reset").addEventListener("click", resetGame);
 document.getElementById("level").addEventListener("change", changeDifficulty);
 const [score, live] = getElementsById("score", "live");
 
@@ -17,7 +18,7 @@ const maxColors = difficultyToMaxColors(CONFIG.level);
 
 live.textContent = maxLive;
 
-const cardColors = new Array(maxColors).fill(maxColors).map((_, index) => {
+const cardColors = new Array(maxColors).fill().map((_, index) => {
   const cardColor = document.createElement("button");
   cardColor.classList.add("card-color");
   cardColor.style.backgroundColor = `var(--color-${index + 1})`;
@@ -29,8 +30,9 @@ colorList.append(...cardColors);
 
 function changeDifficulty(event) {
   const difficulty = event.target.value;
-  CONFIG.level = difficulty;
-  saveToLocalStorage(LOCAL_STORAGE_CONFIG_KEY, CONFIG);
+  const cofig = getFromLocalStorage(LOCAL_STORAGE_CONFIG_KEY);
+  cofig.level = difficulty;
+  saveToLocalStorage(LOCAL_STORAGE_CONFIG_KEY, cofig);
   location.reload();
 }
 
@@ -126,16 +128,6 @@ function updateBoard(win) {
   }
 }
 
-function isGameOver() {
-  return live.textContent === "0";
-}
-
-function resetGame() {
-  score.textContent = 0;
-  live.textContent = maxLive;
-  startGame();
-}
-
 function checkCorrectColor(event) {
   const clickedColor = window.getComputedStyle(event.target).backgroundColor;
   const correctColor = documentElement.style.getPropertyValue("--correctColor");
@@ -152,8 +144,18 @@ function checkCorrectColor(event) {
   }
 }
 
+function isGameOver() {
+  return live.textContent === "0";
+}
+
 function startGame() {
   changeColor();
+}
+
+function resetGame() {
+  score.textContent = 0;
+  live.textContent = maxLive;
+  startGame();
 }
 
 startGame();
