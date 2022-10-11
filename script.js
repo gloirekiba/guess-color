@@ -20,11 +20,12 @@ const LOCAL_STORAGE_CONFIG_KEY = "config";
 const LEVELS = ["easy", "medium", "hard"];
 const CONFIG = getFromLocalStorage(LOCAL_STORAGE_CONFIG_KEY) || {};
 CONFIG.level = CONFIG.level || LEVELS[0];
-CONFIG.recordIndex =
-  CONFIG.level === LEVELS[0] ? 0 : CONFIG.level === LEVELS[1] ? 1 : 2;
+
 const LIVE_DECREMENT = 1;
 const SCORE_INCREMENT = difficultyToScore(CONFIG.level);
 
+const recordIndex =
+  CONFIG.level === LEVELS[0] ? 0 : CONFIG.level === LEVELS[1] ? 1 : 2;
 const maxLive = difficultyToMaxLive(CONFIG.level);
 const maxColors = difficultyToMaxColors(CONFIG.level);
 
@@ -58,7 +59,6 @@ function saveRecord() {
 
   const scoreValue = parseInt(score.textContent);
 
-  const recordIndex = CONFIG.recordIndex;
   records[recordIndex].push(scoreValue);
   records[recordIndex].sort((a, b) => b - a);
   records[recordIndex] = records[recordIndex].slice(0, 3);
@@ -73,8 +73,6 @@ function saveRecord() {
 function changeDifficulty(event) {
   const newLevel = event.target.value;
   CONFIG.level = newLevel;
-  CONFIG.recordIndex =
-    newLevel === LEVELS[0] ? 0 : newLevel === LEVELS[1] ? 1 : 2;
   saveToLocalStorage(LOCAL_STORAGE_CONFIG_KEY, CONFIG);
   location.reload();
 }
@@ -167,9 +165,11 @@ function setUIRecords() {
   easyRecords.innerHTML = records[0]
     .map((record) => `<li>${record}</li>`)
     .join("");
+
   mediumRecords.innerHTML = records[1]
     .map((record) => `<li>${record}</li>`)
     .join("");
+
   hardRecords.innerHTML = records[2]
     .map((record) => `<li>${record}</li>`)
     .join("");
@@ -179,7 +179,6 @@ setUIRecords();
 
 function getBestRecord() {
   const records = getFromLocalStorage(LOCAL_STORAGE_RECORDS_KEY);
-  const recordIndex = CONFIG.recordIndex;
   return records[recordIndex] ? parseInt(records[recordIndex][0]) : 0;
 }
 
