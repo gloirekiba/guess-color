@@ -19,6 +19,10 @@ body {
   overflow-y: hidden;
 }
 
+.hidden {
+  display: none;
+}
+
 .game {
   height: 100vh;
   display: flex;
@@ -89,6 +93,18 @@ main {
   justify-content: center;
 }
 
+@media (max-width: 768px) {
+  .color-list {
+    grid-template-columns: repeat(2, 150px);
+  }
+}
+
+@media (max-width: 480px) {
+  .color-list {
+    grid-template-columns: repeat(1, 150px);
+  }
+}
+
 .card-color {
   height: 150px;
   border-radius: 10px;
@@ -104,6 +120,43 @@ main {
 
 .level {
   font-weight: 700;
+}
+
+dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+
+  font-size: 3rem;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  transition: opacity 0.3s ease-in-out;
+  /* display: none; */
+}
+
+.closeDialog {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 3rem;
+  font-weight: 700;
+  color: #fff;
+  cursor: pointer;
+}
+
+.record h4 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1em;
+  color: #fff;
 }
 
 .animate-character {
