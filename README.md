@@ -7,7 +7,7 @@
 2. If you guess the color correctly, you will get a point.
 3. Wrong guess will decrease your lives by 1. The game ends if you are out of lives.
 4. Difficulies: Easy, Medium, Hard give respectively 100, 200, 300 points multiply by the combo for correct guess.
-5. Difficulties: Easy Medium, Hard give respectively 10, 5, 2 lives on start.
+5. Difficulties: Easy Medium, Hard give respectively 10, 5, 3 lives on start.
 6. The combo is the number of correct guesses in a row. The combo is reset if you guess wrong.
 7. The number of color cards are respectively 3, 6, 9 for Easy, Medium, Hard.
 8. You can reset the game by clicking on the reset button.
@@ -16,6 +16,7 @@
 ## How to run
 1. Clone the repository
 2. Open the index.html file in your browser
+3. Or you can play it online [here](https://gloirekiba.github.io/guess-color/)
 
 ## How to contribute
 1. Fork the repository
