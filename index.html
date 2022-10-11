@@ -26,7 +26,30 @@
               <option value="medium">medium</option>
               <option value="hard">hard</option>
             </select>
-            <button id="records" class="control">records</button>
+            <button id="showRecords" class="control">records</button>
+
+            <dialog id="dialog" class="hidden">
+              <div class="dialog-container">
+                <h3>Records</h3>
+                <div class="records">
+                  <div class="record">
+                    <h4>Easy</h4>
+                    <ul id="easyRecords"></ul>
+                  </div>
+                  <div class="record">
+                    <h4>Medium</h4>
+                    <ul id="mediumRecords"></ul>
+                  </div>
+                  <div class="record">
+                    <h4>Hard</h4>
+                    <ul id="hardRecords"></ul>
+                  </div>
+                </div>
+                <button id="closeDialog" class="control closeDialog">
+                  close
+                </button>
+              </div>
+            </dialog>
           </div>
         </div>
       </section>
